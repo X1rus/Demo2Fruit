@@ -54,23 +54,23 @@
   <void method="add">
    <object class="Fruit">
     <void property="color">
-     <string>Yellow</string>
+     <string>qeqeqe</string>
     </void>
     <void property="name">
-     <string>Yellow</string>
+     <string>qeqeqe</string>
     </void>
    </object>
   </void>
   <void method="add">
    <object class="Citrus">
     <void property="color">
-     <string>Yellow</string>
+     <string>tytyy</string>
     </void>
     <void property="name">
-     <string>Yellow</string>
+     <string>tytyt</string>
     </void>
     <void property="vitaminC">
-     <int>22</int>
+     <int>44</int>
     </void>
    </object>
   </void>

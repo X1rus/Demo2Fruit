@@ -22,6 +22,7 @@
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 class Demo {
@@ -45,8 +46,8 @@ class Demo {
 
         //citrus.input(fruitsList);
 
-       //System.out.println(citrus.output(citrus));
-        //System.out.println(fruit.output(fruit));
+        citrus.output();
+        fruit.output();
 
         System.out.println("------");
         //fruit.output();
@@ -57,21 +58,28 @@ class Demo {
             System.out.println(i.toString());
         }
 
-       // fruit.input(fruitsList);
-       // fruit.output();
+        fruit.Serialization(fruitsList);
+        fruit.Deserialization();
 
         System.out.println("--------finde----------");
 
        // for(Fruit i:fruitsList)
        // System.out.println(getFruitsColor(fruitsList, "Yellow"));
-        ArrayList<Fruit> listFruitsByColor = getFruitsColor( fruitsList, "Yellow");
+        ArrayList<Fruit> listFruitsByColor = getFruitsByColor( fruitsList, "Yellow");
         for (Fruit f : listFruitsByColor) {
+            System.out.println(f.toString());
+        }
+
+
+        System.out.println("--------sort by name----------");
+       sortFruitByName(fruitsList);
+        for (Fruit f : fruitsList) {
             System.out.println(f.toString());
         }
 
     }
 
-    public static ArrayList<Fruit> getFruitsColor(ArrayList<Fruit> fruits, String color) {
+    public static ArrayList<Fruit> getFruitsByColor(ArrayList<Fruit> fruits, String color) {
 
         ArrayList<Fruit> newFruitsList = new ArrayList<>();
 
@@ -81,6 +89,12 @@ class Demo {
             }
         }
         return newFruitsList;
+    }
+
+    public  static ArrayList<Fruit> sortFruitByName(ArrayList<Fruit> fruits)
+    {
+        Collections.sort(fruits, new SortFruit());
+        return fruits;
     }
 
 

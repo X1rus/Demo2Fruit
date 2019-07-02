@@ -2,8 +2,9 @@ import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 
-public class Fruit implements Serializable {
+public class Fruit implements Serializable{
 
 
     private String Name;
@@ -43,11 +44,11 @@ public class Fruit implements Serializable {
         return new Fruit();
     }
 
-    public String output(Fruit fruits) {
-        return fruits.toString();
+    public void output() {
+        System.out.println("new fruit add\n"+this);
     }
 
-    public void input(ArrayList arrayList) throws IOException {
+    public void Serialization(ArrayList arrayList) throws IOException {
         FileOutputStream fos = new FileOutputStream("fruits.xml");
         XMLEncoder encoder = new XMLEncoder(fos);
         encoder.writeObject(arrayList);
@@ -55,7 +56,7 @@ public class Fruit implements Serializable {
         fos.close();
     }
 
-    public void output() {
+    public void Deserialization() {
         try (XMLDecoder xmlDecoder = new XMLDecoder(new FileInputStream("fruits.xml"))) {
             ArrayList<Fruit> arrayList = (ArrayList<Fruit>) xmlDecoder.readObject();
             System.out.printf(arrayList.toString());
@@ -70,4 +71,7 @@ public class Fruit implements Serializable {
     public String toString() {
         return "\nFruit name: " + getName() + "\tfruit color: " + getColor() + "\n";
     }
+
+
+
 }
