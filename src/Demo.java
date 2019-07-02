@@ -20,79 +20,84 @@
 
 */
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+import java.util.NoSuchElementException;
 
 class Demo {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         ArrayList<Fruit> fruitsList = new ArrayList<>();
         Fruit fruit = new Fruit();
         Fruit citrus = new Citrus();
 
-        fruitsList.add(new Fruit("Apple", "Green"));
-        fruitsList.add(new Fruit("Pineapple", "Yellow"));
-        fruitsList.add(new Fruit("pear", "Orange"));
-        fruitsList.add(new Fruit("Banan", "Yellow"));
-        fruitsList.add(new Fruit("pear", "Orange"));
+    fruitsList.add(new Fruit("Apple", "Green"));
+    fruitsList.add(new Fruit("Pineapple", "yellow"));
+    fruitsList.add(new Fruit("pear", "Orange"));
+    fruitsList.add(new Fruit("Banan", "yellow"));
+    fruitsList.add(new Fruit("pear", "Orange"));
 
+
+        System.out.println("\n----------Input fruit-------------");
         fruit.input();
         citrus.input();
 
-        fruitsList.add(fruit);//?
-        fruitsList.add(citrus);
-
-
-        //citrus.input(fruitsList);
-
+        System.out.println("\n----------Output fruit -------------");
         citrus.output();
         fruit.output();
 
-        System.out.println("------");
+        System.out.println("\n\n----------Add to colections-------------");
+        fruitsList.add(fruit);//?
+        fruitsList.add(citrus);
+
+        System.out.println("\n\n------Print fruit list------");
         //fruit.output();
 
 
         for (Fruit i : fruitsList) {
 
-            System.out.println(i.toString());
+            System.out.print(i.toString());
         }
 
-        fruit.Serialization(fruitsList);
-        fruit.Deserialization();
+        System.out.println("\n\n------Serialazation/Deserialization fruit list------");
+        fruit.serialization(fruitsList);
+        fruit.deserialization();
 
-        System.out.println("--------finde----------");
+        System.out.println("\n\n--------finde by color----------");
 
-       // for(Fruit i:fruitsList)
-       // System.out.println(getFruitsColor(fruitsList, "Yellow"));
-        ArrayList<Fruit> listFruitsByColor = getFruitsByColor( fruitsList, "Yellow");
+        ArrayList<Fruit> listFruitsByColor = getFruitsByColor(fruitsList, "Yellow");
         for (Fruit f : listFruitsByColor) {
-            System.out.println(f.toString());
+            System.out.print(f.toString());
         }
 
 
-        System.out.println("--------sort by name----------");
-       sortFruitByName(fruitsList);
+        System.out.println("\n\n--------sort by name----------");
+        sortFruitByName(fruitsList);
         for (Fruit f : fruitsList) {
-            System.out.println(f.toString());
+            System.out.print(f.toString());
         }
+        System.out.println("\n\n------Serialazation/Deserialization sorted list------");
+        fruit.serialization(fruitsList,"sortedFruit.xml");
+        fruit.deserialization("sortedFruit.xml");
+
 
     }
 
+    //-----finde by color-----
     public static ArrayList<Fruit> getFruitsByColor(ArrayList<Fruit> fruits, String color) {
+
 
         ArrayList<Fruit> newFruitsList = new ArrayList<>();
 
         for (Fruit fruit : fruits) {
-            if (fruit.getColor().equals(color)) {
+            if (fruit.getColor().equals(color.toLowerCase())) {
                 newFruitsList.add(fruit);
             }
         }
         return newFruitsList;
     }
 
-    public  static ArrayList<Fruit> sortFruitByName(ArrayList<Fruit> fruits)
-    {
+    // -----Sort by Name-----
+    public static ArrayList<Fruit> sortFruitByName(ArrayList<Fruit> fruits) {
         Collections.sort(fruits, new SortFruit());
         return fruits;
     }
