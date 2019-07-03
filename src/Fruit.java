@@ -45,6 +45,11 @@ public class Fruit implements Serializable {
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
+        catch (Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+
         //return new Fruit();
     }
 

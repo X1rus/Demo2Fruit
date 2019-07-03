@@ -29,22 +29,27 @@ public class Citrus extends Fruit implements Serializable {
     @Override
     public void input() {
         try {
+
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             //super.input();
             System.out.println("Enter fruit name: ");
             setName(br.readLine());
             System.out.println("Enter fruit color: ");
             setColor(br.readLine());
-            System.out.println("Enter vitamin C for citrus: ");
-            setVitaminC(Integer.parseInt((br.readLine())));
+            do {
+                System.out.println("Enter vitamin C for citrus >0: ");
+                setVitaminC(Integer.parseInt((br.readLine())));
+            } while (getVitaminC() <= 0) ;
 
-            System.out.println("new citrus add");
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        } catch (InputMismatchException ex) {
-            System.out.println("enter only number"+ex.getMessage());
+
+                System.out.println("new citrus add");
+            } catch(IOException ex){
+                System.out.println(ex.getMessage());
+            } catch(InputMismatchException ex){
+                System.out.println("enter only number" + ex.getMessage());
+            }
         }
-    }
+
 
     @Override
     public void output() {
