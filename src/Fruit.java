@@ -1,11 +1,8 @@
-import java.beans.XMLDecoder;
-import java.beans.XMLEncoder;
+
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Comparator;
 
 public class Fruit implements Serializable {
-
+    public BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     private String Name;
     private String Color;
@@ -36,78 +33,38 @@ public class Fruit implements Serializable {
 
     public void input() {
         try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
             System.out.println("Enter fruit name: ");
             setName(br.readLine().toLowerCase());
+            if (getName() != null && !getName().isEmpty())
+                System.out.println("name add");
+            else throw new IOException("string is empty");
             System.out.println("Enter fruit color: ");
             setColor(br.readLine().toLowerCase());
+            if (getColor() != null && !getColor().isEmpty())
+                System.out.println("color add");
+            else throw new IOException("string is empty");
             System.out.println("new fruit add");
         } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+            ex.printStackTrace();
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
-        }
-        catch (Exception ex)
-        {
-            System.out.println(ex.getMessage());
+
+            //return new Fruit();
         }
 
-        //return new Fruit();
     }
 
     public void output() {
         System.out.print(this);
     }
 
-    public void serialization(ArrayList<Fruit> arrayList) {
-        try {
-            FileOutputStream fos = new FileOutputStream("fruits.xml");
-            XMLEncoder encoder = new XMLEncoder(fos);
-            encoder.writeObject(arrayList);
-            encoder.close();
-            fos.close();
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
-
-    public void deserialization() {
-        try (XMLDecoder xmlDecoder = new XMLDecoder(new FileInputStream("fruits.xml"))) {
-            ArrayList<Fruit> arrayList = (ArrayList<Fruit>) xmlDecoder.readObject();
-            System.out.printf(arrayList.toString());
-        } catch (Exception ex) {
-
-            System.out.println(ex.getMessage());
-        }
-
-
-    }
-
-
     @Override
     public String toString() {
         return "\nFruit name: " + getName() + "\tfruit color: " + getColor();
     }
 
-    public void serialization(ArrayList<Fruit> arrayList, String path) {
-        try {
-            FileOutputStream fos = new FileOutputStream(path);
-            XMLEncoder encoder = new XMLEncoder(fos);
-            encoder.writeObject(arrayList);
-            encoder.close();
-            fos.close();
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
-
-    public void deserialization(String path) {
-        try (XMLDecoder xmlDecoder = new XMLDecoder(new FileInputStream(path))) {
-            ArrayList<Fruit> arrayList = (ArrayList<Fruit>) xmlDecoder.readObject();
-            System.out.printf(arrayList.toString());
-        } catch (Exception ex) {
-
-            System.out.println(ex.getMessage());
-        }
-    }
 }
 
 

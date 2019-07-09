@@ -4,10 +4,10 @@
   <void method="add">
    <object class="Fruit">
     <void property="color">
-     <string>Green</string>
+     <string>green</string>
     </void>
     <void property="name">
-     <string>Apple</string>
+     <string>apple</string>
     </void>
    </object>
   </void>
@@ -17,14 +17,14 @@
      <string>yellow</string>
     </void>
     <void property="name">
-     <string>Pineapple</string>
+     <string>pineapple</string>
     </void>
    </object>
   </void>
   <void method="add">
    <object class="Fruit">
     <void property="color">
-     <string>Orange</string>
+     <string>orange</string>
     </void>
     <void property="name">
      <string>pear</string>
@@ -37,40 +37,79 @@
      <string>yellow</string>
     </void>
     <void property="name">
-     <string>Banan</string>
+     <string>banan</string>
     </void>
    </object>
   </void>
   <void method="add">
    <object class="Fruit">
     <void property="color">
-     <string>Orange</string>
+     <string>red</string>
     </void>
     <void property="name">
-     <string>pear</string>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="Fruit">
-    <void property="color">
-     <string>etetet</string>
-    </void>
-    <void property="name">
-     <string>etet</string>
+     <string>mango</string>
     </void>
    </object>
   </void>
   <void method="add">
    <object class="Citrus">
     <void property="color">
-     <string>etetet</string>
+     <string>yellow</string>
     </void>
     <void property="name">
-     <string>etete</string>
+     <string>orange</string>
     </void>
     <void property="vitaminC">
-     <int>33</int>
+     <int>12</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Citrus">
+    <void property="color">
+     <string>red</string>
+    </void>
+    <void property="name">
+     <string>grapefruit</string>
+    </void>
+    <void property="vitaminC">
+     <int>19</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Citrus">
+    <void property="color">
+     <string>yellow</string>
+    </void>
+    <void property="name">
+     <string>lemon</string>
+    </void>
+    <void property="vitaminC">
+     <int>30</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Fruit">
+    <void property="color">
+     <string>zzzz</string>
+    </void>
+    <void property="name">
+     <string>zzzz</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Citrus">
+    <void property="color">
+     <string>zzzz</string>
+    </void>
+    <void property="name">
+     <string>zzzz</string>
+    </void>
+    <void property="vitaminC">
+     <int>111</int>
     </void>
    </object>
   </void>

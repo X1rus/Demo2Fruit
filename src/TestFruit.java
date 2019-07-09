@@ -1,9 +1,6 @@
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import java.beans.XMLDecoder;
-import java.beans.XMLEncoder;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -11,106 +8,93 @@ public class TestFruit {
 
 
     @Test
-    public void inputTest() {
+    public void SetAndGetTest() {
         //Arrange
-        Fruit actual = new Fruit();
-        Fruit expected = new Fruit("fruit", "color");
+        Fruit expected = new Fruit();
+        Fruit actual = new Fruit("fruit", "color");
+
         //Act
-        actual.setName("fruit");
-        actual.setColor("color");
+        expected.setName("fruit");
+        expected.setColor("color");
         //Assert
-        Assert.assertEquals(actual.getName(),expected.getName());
-        Assert.assertEquals(actual.getColor(),expected.getColor());
+        Assert.assertEquals(actual.getName(), expected.getName());
+        Assert.assertEquals(actual.getColor(), expected.getColor());
     }
 
     @Test
-    public void otputTest()
-    {
-        //Arrange
-        Fruit expected = new Fruit("fruit", "color");
-        //Act
-         expected.output();
-        //Assert
-        Assert.assertTrue(true,expected.getName());
-        Assert.assertTrue(true,expected.getColor());
-
-
-    }
-
-
-    @Test
-    public void serializationTest()
-    {
+    public void serializationTest() throws FileNotFoundException {
         //Arrange
         ArrayList<Integer> expectedFruitsList = new ArrayList<>();
         ArrayList<Integer> actualFruitsList = new ArrayList<>();
-        expectedFruitsList .add(1);
+        expectedFruitsList.add(1);
 
         //Act
-        try {
-            FileOutputStream fos = new FileOutputStream("test.xml");
-            XMLEncoder encoder = new XMLEncoder(fos);
-            encoder.writeObject(expectedFruitsList);
-            encoder.close();
-            fos.close();
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
+        Functional.serialization(expectedFruitsList, "test.xml");
 
-        try {
-            XMLDecoder xmlDecoder = new XMLDecoder(new FileInputStream("test.xml"));
-            actualFruitsList = (ArrayList<Integer>) xmlDecoder.readObject();
-        } catch (Exception ex) {
+        XMLDecoder xmlDecoder = new XMLDecoder(new FileInputStream("test.xml"));
+        actualFruitsList = (ArrayList<Integer>) xmlDecoder.readObject();
 
-            System.out.println(ex.getMessage());
-        }
         //Assert
-        Assert.assertEquals(expectedFruitsList,actualFruitsList);
-
+        Assert.assertEquals(expectedFruitsList, actualFruitsList);
     }
 
     @Test
-    public void getFruitsByColorTest()
-    {
+    public void getFruitsByColorTest() {
         //Arrange
-        ArrayList<Fruit> newFruitsList = new ArrayList<>();
-        ArrayList<Fruit> fruitsList = new ArrayList<>();
-        String color = "yellow";
-        fruitsList.add(new Fruit("Pineapple", "yellow"));
+        ArrayList<Fruit> testList = new ArrayList<>();
+        ArrayList<Fruit> actual = new ArrayList<>();
+        ArrayList<Fruit> expected;
+        ArrayList<String> expectedColor = new ArrayList<>();
+        ArrayList<String> actualColor = new ArrayList<>();
 
-        String expected=null;
-        String actual = null;
+        testList.add(new Fruit("apple", "green"));
+        testList.add(new Fruit("pineapple", "yellow"));
+        testList.add(new Fruit("pear", "orange"));
+        testList.add(new Fruit("banan", "yellow"));
+        testList.add(new Fruit("pear", "orange"));
 
+        actual.add(new Fruit("pineapple", "yellow"));
+        actual.add(new Fruit("banan", "yellow"));
         //Act
-
-        newFruitsList=Demo.getFruitsByColor(fruitsList,color);
-
-        for (Fruit i:newFruitsList)
-            expected=i.getColor();
-        for (Fruit i:fruitsList)
-            actual=i.getColor();
+        expected = Functional.getFruitsByColor(testList, "yellow");
+        for (Fruit f : expected) {
+            expectedColor.add(f.getColor());
+        }
+        for (Fruit f : actual) {
+            actualColor.add(f.getColor());
+        }
         //Assert
-
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals(expectedColor,actualColor);
     }
 
     @Test
-    public  void sortFruitByNameTest()
-    {
-        //Arrange
-        ArrayList<Fruit> fruitsList = new ArrayList<>();
-        fruitsList.add(new Fruit("Apple", "Green"));
-        fruitsList.add(new Fruit("Pineapple", "yellow"));
-        fruitsList.add(new Fruit("pear", "Orange"));
-        fruitsList.add(new Fruit("Banan", "yellow"));
-        fruitsList.add(new Fruit("pear", "Orange"));
+    public void sortFruitByNameTest() {
+        ArrayList<String> expectedName = new ArrayList<>();
+        ArrayList<String> actualName = new ArrayList<>();
 
-        //Act
-         ArrayList<Fruit> actual= Demo.sortFruitByName(fruitsList);
+        ArrayList<Fruit> fruits = new ArrayList<>();
 
+        fruits.add(new Fruit("apple", "green"));
+        fruits.add(new Fruit("mango", "red"));
+        fruits.add(new Fruit("banan", "yellow"));
+
+
+        ArrayList<Fruit> expected = new ArrayList<>();
+        expected.add(new Fruit("apple", "green"));
+        expected.add(new Fruit("banan", "yellow"));
+        expected.add(new Fruit("mango", "red"));
+
+
+        //Actual
+        ArrayList<Fruit> actual = Functional.sortFruitByName(expected);
+
+        for (Fruit f : expected) {
+            expectedName.add(f.getName());
+        }
+        for (Fruit f : actual) {
+            actualName.add(f.getName());
+        }
         //Assert
-        Assert.assertEquals(actual,fruitsList);
-
+        Assert.assertEquals(expectedName, actualName);
     }
-
 }

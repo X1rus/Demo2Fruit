@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.InputMismatchException;
 
 public class Citrus extends Fruit implements Serializable {
-
+    public BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private int vitaminC;
 
     public Citrus() {
@@ -29,31 +29,37 @@ public class Citrus extends Fruit implements Serializable {
     @Override
     public void input() {
         try {
-
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             //super.input();
-            System.out.println("Enter fruit name: ");
-            setName(br.readLine());
-            System.out.println("Enter fruit color: ");
-            setColor(br.readLine());
+            System.out.println("Enter citrus name: ");
+            setName(br.readLine().toLowerCase());
+            if (getName() != null && !getName().isEmpty())
+                System.out.println("name add");
+            else throw new IOException("string is empty");
+            System.out.println("Enter citrus color: ");
+            setColor(br.readLine().toLowerCase());
+            if (getColor() != null && !getColor().isEmpty())
+                System.out.println("color add");
+            else throw new IOException("string is empty");
             do {
                 System.out.println("Enter vitamin C for citrus >0: ");
                 setVitaminC(Integer.parseInt((br.readLine())));
-            } while (getVitaminC() <= 0) ;
+            } while (getVitaminC() <= 0);
 
-
-                System.out.println("new citrus add");
-            } catch(IOException ex){
-                System.out.println(ex.getMessage());
-            } catch(InputMismatchException ex){
-                System.out.println("enter only number" + ex.getMessage());
-            }
+            System.out.println("new citrus add");
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+            ex.printStackTrace();
+        } catch (InputMismatchException ex) {
+            System.out.println("enter only number" + ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println(ex.getStackTrace());
         }
+    }
 
 
     @Override
     public void output() {
-        System.out.print( this);
+        System.out.print(this);
     }
 
     @Override
